@@ -4,15 +4,15 @@ import com.example.tasks.api.TaskResource;
 import com.example.tasks.auth.BasicAuthenticator;
 import com.example.tasks.auth.ApiKeyAuthenticator;
 import com.example.tasks.db.TaskDAO;
-import io.dropwizard.Application;
+import io.dropwizard.core.Application;
 import io.dropwizard.auth.AuthDynamicFeature;
 import io.dropwizard.auth.AuthValueFactoryProvider;
 import io.dropwizard.auth.basic.BasicCredentialAuthFilter;
 import io.dropwizard.auth.chained.ChainedAuthFilter;
 import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.jdbi3.JdbiFactory;
-import io.dropwizard.setup.Bootstrap;
-import io.dropwizard.setup.Environment;
+import io.dropwizard.core.setup.Bootstrap;
+import io.dropwizard.core.setup.Environment;
 import io.swagger.jaxrs.config.BeanConfig;
 import io.swagger.jaxrs.listing.ApiListingResource;
 import io.swagger.jaxrs.listing.SwaggerSerializers;
@@ -33,12 +33,10 @@ public class TaskApplication extends Application<TaskConfiguration> {
         return "task-management-api";
     }
     
-    @Override
     public void initialize(Bootstrap<TaskConfiguration> bootstrap) {
         // Add any bundles here
     }
     
-    @Override
     public void run(TaskConfiguration configuration, Environment environment) {
         final JdbiFactory factory = new JdbiFactory();
         final Jdbi jdbi = factory.build(environment, configuration.getDataSourceFactory(), "mysql");
